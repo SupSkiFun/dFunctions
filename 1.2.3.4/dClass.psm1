@@ -51,7 +51,7 @@ class dSAN
 
     static [psobject] GetCreds ([string] $uri, [string] $auth_hash, [hashtable] $headers)
     {
-        # Needs Try / Catch
+        # Needs Try / Catch - Better Error Handling
         $uric = $uri + [dSAN]::uri_login + $auth_hash
         $cred_info = Invoke-RestMethod -Uri $uric -SkipCertificateCheck -Headers $headers
         return $cred_info
@@ -59,7 +59,7 @@ class dSAN
 
     static [psobject] GetItem ([string] $uri, [string] $item, [hashtable] $headers)
     {
-        # Needs Try / Catch
+        # Needs Try / Catch - Better Error Handling
         $urii = $uri + [dSAN]::uri_show + $item
         $resp2 = Invoke-RestMethod -Uri $urii -SkipCertificateCheck -Headers $headers
         return $resp2

@@ -27,6 +27,7 @@ function Show-SANItem
 
         $headers = [dSAN]::headers
         $session_key = [dSAN]::GetSessionString($uri, $credential, $headers)
+
         if ($($session_key.status) -eq "Error")
         {
             Write-Output $([dSAN]::mesg1)`n$($session_key.info.status)
@@ -44,12 +45,6 @@ function Show-SANItem
     {
         $headers.'sessionKey' = $($session_key.info)
         $item_info = [dSAN]::GetItem($uri,$item,$headers)
-        if ($($item_info.status) -eq "Error")
-        {
-            Write-Output $([dSAN]::mesg2)`n$($item_info.info.status)
-            break
-        }
-        
         if ($item -eq 'configuration') 
         { 
             $item_info
