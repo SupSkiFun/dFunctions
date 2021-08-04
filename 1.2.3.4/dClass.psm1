@@ -4,7 +4,9 @@ class dSAN
     static $uri_show = 'api/show/'
     static $headers = @{'datatype'='json'}
     static $mesg1 = 'Terminating.  Login Unsuccessful.'
-    static $mesg2 = 'Terminating.  Error accessing '
+    static $mesg2 = 'Terminating.  Error Accessing:'
+
+    # hashtable is key=api-all-word - value=json-object-key.  They don't always match.
     static $items = @{
         'controllers' = 'controllers';
         'disks' = 'drives' ;
@@ -23,7 +25,7 @@ class dSAN
         'volumes' = 'volumes'
     }
 
-    static [hashtable] GetSessionString ([uri] $uri , [PsCredential] $credential, [hashtable] $headers)
+    static [hashtable] GetSessionString ([uri] $uri, [PsCredential] $credential, [hashtable] $headers)
     {
         $auth_hash = [dSAN]::MakeAuthString($credential)
         $cred_info = [dSAN]::GetCreds($uri,$auth_hash,$headers)
@@ -49,18 +51,17 @@ class dSAN
 
     static [psobject] GetCreds ([string] $uri, [string] $auth_hash, [hashtable] $headers)
     {
-        # Put Try Except here
+        # Needs Try / Catch
         $uric = $uri + [dSAN]::uri_login + $auth_hash
         $cred_info = Invoke-RestMethod -Uri $uric -SkipCertificateCheck -Headers $headers
-        return $cred_info 
+        return $cred_info
     }
 
     static [psobject] GetItem ([string] $uri, [string] $item, [hashtable] $headers)
     {
-        # Put Try Except here
+        # Needs Try / Catch
         $urii = $uri + [dSAN]::uri_show + $item
         $resp2 = Invoke-RestMethod -Uri $urii -SkipCertificateCheck -Headers $headers
         return $resp2
     }
-
 }
