@@ -1,5 +1,45 @@
 using module ./dClass.psm1
 
+<#
+.SYNOPSIS
+Retrieves items from Dell ME4024
+.DESCRIPTION
+Retrieves items from Dell ME4024 via REST API
+.PARAMETER Credential
+PSCredential of SAN User and Password.  Use $MyCreds = Get-Credential.  See Examples.
+.PARAMETER Uri
+HTTPS URI for the SAN.  Example:  https://MySAN.MyDomain.Org
+.PARAMETER Item
+SAN Item to query.  Defaults to 'system'.  Tab through or type a valid selection if preferred:
+configuration,controllers,disks,dns-parameters,email-parameters,enclosures,events,host-groups,
+maps,network-parameters,ntp-status,service-tag-info,system,vdisks,versions, or volumes.
+.NOTES
+1. Item 'configuration' returns a large object of multiple properties.
+2. Item defaults to 'system'.  Tab through or type a valid selection if preferred:
+configuration,controllers,disks,dns-parameters,email-parameters,enclosures,events,host-groups,
+maps,network-parameters,ntp-status,service-tag-info,system,vdisks,versions, or volumes.
+3. Limited error handling.  A future update will be more robust.
+4. HTTPS certificate checking is disabled.
+.EXAMPLE
+Retrieve default output (system):
+
+$u = https://MySAN.MyDomain.Org
+$MyCreds = Get-Credential -UserName SanUser     <Enter Password>
+$MyVar = Show-SANItem -Credential $MyCreds -Uri $u
+.EXAMPLE
+Retrieve vdisks output:
+
+$u = https://MySAN.MyDomain.Org
+$MyCreds = Get-Credential -UserName SanUser     <Enter Password>
+$MyVar = Show-SANItem -Credential $MyCreds -Uri $u -Item vdisks
+.EXAMPLE
+Retrieve configuration output (lots of info):
+
+$u = https://MySAN.MyDomain.Org
+$MyCreds = Get-Credential -UserName SanUser     <Enter Password>
+$MyVar = Show-SANItem -Credential $MyCreds -Uri $u -Item configuration
+#>
+
 function Show-SANItem
 {
     [cmdletbinding()]
