@@ -54,7 +54,7 @@ function Show-SANItem
         [Parameter(Mandatory = $False)]
         [ValidateSet('configuration','controllers','disks','dns-parameters','email-parameters','enclosures','events',
         'host-groups','maps','network-parameters','ntp-status','service-tag-info','system','vdisks','versions','volumes')]
-        [string] $Item = 'system'  
+        [string] $Item = 'system'
     )
 
     Begin
@@ -85,8 +85,8 @@ function Show-SANItem
     {
         $headers.'sessionKey' = $($session_key.info)
         $item_info = [dSAN]::GetItem($uri,$item,$headers)
-        if ($item -eq 'configuration') 
-        { 
+        if ($item -eq 'configuration')
+        {
             $item_info
         }
         else

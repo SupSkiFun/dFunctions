@@ -35,8 +35,8 @@ class dSAN
         }
         return @{'status'='OK';'info'=$cred_info.status.response}
     }
-    
-    static [string] MakeAuthString([PSObject] $Credential)
+
+    static [string] MakeAuthString([PSCredential] $Credential)
     {
         $user = $Credential.UserName
         $pswd = $Credential.GetNetworkCredential().Password
