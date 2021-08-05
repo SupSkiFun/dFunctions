@@ -2,9 +2,9 @@ using module ./dClass.psm1
 
 <#
 .SYNOPSIS
-Retrieves items from Dell ME4024
+Retrieves component information from Dell ME4024 SAN
 .DESCRIPTION
-Retrieves items from Dell ME4024 via REST API
+Retrieves component information from Dell ME4024 SAN via REST API
 .PARAMETER Credential
 PSCredential of SAN User and Password.  Use $MyCreds = Get-Credential.  See Examples.
 .PARAMETER Uri
